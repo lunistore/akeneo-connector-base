@@ -1,0 +1,16 @@
+kiboko_assets:
+  steps:
+    gallery:
+      processor:
+        imageAttribute:
+          label: Main image
+          help: This image will be exported and set to be used as the "Main image" (product view image) on Magento product page
+        thumbnailAttribute:
+          label: Thumbnail
+          help: This image will be exported and set to be used as the "Small image" (product lists image) on Magento product page
+        smallImageAttribute:
+          label: Small image
+          help: This image will be exported and set to be used as the "Main image" (product view image) on Magento product page
+        galleryAttributes:
+          label: Gallery attributes to export
+          help: Those attributes will be exported and added to the product image gallery

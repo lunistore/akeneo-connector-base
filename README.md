@@ -79,7 +79,6 @@ In your bundle, you will need theses configurations:
 
 ```yaml
 # Resources/config/services.yml
-# app/config/services.yml
 parameters:
     acme_dummy_connector.manager.attributes.class: Kiboko\Component\Connector\Manager\AttributeManager
 
@@ -130,6 +129,23 @@ services:
                 - 'assets_job' # the job name
         tags:
             - { name: pim_import_export.job_parameters.form_configuration_provider }
+```
+
+## Added functionality in version 1.2
+
+### Ready to use bundle `KibokoMediaAssetConnectorBundle`
+
+This bundle makes available the media assets export for Magento stores.
+
+In your file `app/AppKernel.php`, add the bundle to your configuration
+
+```php
+    $bundles = [
+        //...
+        Kiboko\Bundles\MediaAssetConnectorBundle\KibokoMediaAssetConnectorBundle(),
+        //...
+    ];
+
 ```
 
 ## Removed functionality in version 1.2

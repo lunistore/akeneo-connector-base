@@ -1,0 +1,59 @@
+parameters:
+    kiboko_media_asset_connector.manager.attributes.class: Kiboko\Component\Connector\Manager\AttributeManager
+
+    kiboko_media_asset_connector.job.job_parameters.validator.image_attribute_validator.class:      Kiboko\Component\Connector\JobParameters\Constraint\ImageAttributeValidator
+    kiboko_media_asset_connector.job.job_parameters.validator.image_attribute_list_validator.class: Kiboko\Component\Connector\JobParameters\Constraint\ImageAttributeListValidator
+
+    kiboko_media_asset_connector.job.job_parameters.default_values_provider.assets_export.class:        Kiboko\Component\Connector\JobParameters\DefaultValuesProvider\ProductAssetsExport
+    kiboko_media_asset_connector.job.job_parameters.constraint_collection_provider.assets_export.class: Kiboko\Component\Connector\JobParameters\ConstraintCollectionProvider\ProductAssetsExport
+    kiboko_media_asset_connector.job.job_parameters.form_configuration_provider.assets_export.class:    Kiboko\Component\Connector\JobParameters\FormConfigurationProvider\ProductAssetsExport
+
+    kiboko_media_asset_connector.manager.attributes.class: Kiboko\Component\Connector\Manager\AttributeManager
+
+services:
+    # Attribute manager, used to list the installed attributes on your Akeneo instance
+    kiboko_media_asset_connector.manager.attributes:
+        class: '%kiboko_media_asset_connector.manager.attributes.class%'
+        arguments:
+            - '@pim_catalog.repository.attribute'
+
+    # Validation services
+    validator.image_attribute:
+        class: '%kiboko_media_asset_connector.job.job_parameters.validator.image_attribute_validator.class%'
+        arguments:
+            - '@kiboko_media_asset_connector.manager.attributes'
+        tags:
+            - { name: validator.constraint_validator }
+    validator.image_attribute_list:
+        class: '%kiboko_media_asset_connector.job.job_parameters.validator.image_attribute_list_validator.class%'
+        arguments:
+            - '@kiboko_media_asset_connector.manager.attributes'
+        tags:
+            - { name: validator.constraint_validator }
+
+    # Default values for our JobParameters
+    kiboko_media_asset_connector.job.job_parameters.default_values_provider.assets_export:
+        class: '%kiboko_media_asset_connector.job.job_parameters.default_values_provider.assets_export.class%'
+        arguments:
+            -
+                - 'assets_job' # the job name
+        tags:
+            - { name: akeneo_batch.job.job_parameters.default_values_provider }
+
+    # Validation constraints for our JobParameters
+    kiboko_media_asset_connector.job.job_parameters.constraint_collection_provider.assets_export:
+        class: '%kiboko_media_asset_connector.job.job_parameters.constraint_collection_provider.assets_export.class%'
+        arguments:
+            -
+                - 'assets_job' # the job name
+        tags:
+            - { name: akeneo_batch.job.job_parameters.constraint_collection_provider }
+
+    # Form configuration for our JobParameters
+    kiboko_media_asset_connector.job.job_parameters.form_configuration_provider.assets_export:
+        class: '%kiboko_media_asset_connector.job.job_parameters.form_configuration_provider.assets_export.class%'
+        arguments:
+            -
+                - 'assets_job' # the job name
+        tags:
+            - { name: pim_import_export.job_parameters.form_configuration_provider }

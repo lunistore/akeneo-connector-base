@@ -1,0 +1,16 @@
+kiboko_assets:
+  steps:
+    gallery:
+      processor:
+        imageAttribute:
+          label: Image principale
+          help: Cet attribut sera exportés et placé en tant qu'image principale sur la fiche produit
+        thumbnailAttribute:
+          label: Image miniature
+          help: Cet attribut sera exportés et placé en tant qu'image miniature dans les listes de produits
+        smallImageAttribute:
+          label: Petite image
+          help: Cet attribut sera exportés et placé en tant qu'image miniature dans le récapitulatif panier
+        galleryAttributes:
+          label: Attributs de gallerie à exporter
+          help: Ces attributs seront exportés pour la gallerie d'images produits

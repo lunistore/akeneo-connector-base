@@ -1,6 +1,6 @@
 {
-    "name": "kiboko/akeneo-connector-tools",
-    "description": "Base tools to build Akeneo connectors, released with ready-to-use bundles.",
+    "name": "kiboko/akeneo-connector-base",
+    "description": "Base tools to build Akeneo connectors",
     "type": "library",
     "license": "LGPL",
     "authors": [
@@ -21,13 +21,21 @@
             "branch": "master"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Kiboko\\Component\\Connector\\": ""
+        }
+    },
     "config": {
         "bin-dir": "bin"
     },
     "minimum-stability": "stable",
     "prefer-stable":true,
     "require": {
-        "kiboko/akeneo-connector-base": "self.version",
-        "kiboko/akeneo-media-connector": "self.version"
+        "akeneo/pim-community-dev": "1.6.*"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.0",
+        "fzaninotto/faker": "dev-master"
     }
 }
